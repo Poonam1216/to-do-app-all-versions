@@ -1,6 +1,6 @@
 import styles from "./TodoItem.module.css";
 
-function TodoItem({ todoName, todoDate }) {
+function TodoItem({ todoName, todoDate, onDeleteClick }) {
   // let todoName = "Buy Milk";
   // let todoDate = "04/10/2023";
   return (
@@ -9,7 +9,13 @@ function TodoItem({ todoName, todoDate }) {
         <div className="col-6">{todoName}</div>
         <div className="col-4">{todoDate}</div>
         <div className="col-2">
-          <button type="button" className={`${styles.pgButton} btn btn-danger`}>
+          <button
+            type="button"
+            className={`${styles.pgButton} btn btn-danger`}
+            onClick={() => {
+              onDeleteClick(todoName);
+            }}
+          >
             Delete
           </button>
         </div>
