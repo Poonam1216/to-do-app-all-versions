@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styles from "./AddTodo.module.css";
+import { BiMessageAdd } from "react-icons/bi";
 
 function AddTodo({ onNewItem }) {
-  const [todoName, setTodoName] = useState();
-  const [dueDate, setDueDate] = useState();
+  const [todoName, setTodoName] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   const handleNameChange = (event) => {
     setTodoName(event.target.value);
@@ -13,7 +14,9 @@ function AddTodo({ onNewItem }) {
     setDueDate(event.target.value);
   };
 
-  const handleAddButtonClick = () => {
+  const handleAddButtonClick = (event) => {
+    // console.log(event);
+    event.preventDefault();
     onNewItem(todoName, dueDate);
     setTodoName("");
     setDueDate("");
@@ -21,28 +24,29 @@ function AddTodo({ onNewItem }) {
 
   return (
     <div className="container text-center">
-      <div className={`${styles.pgRow} row`}>
-        <div className="col-6">
-          <input
-            type="text"
-            placeholder="Enter To-do Here"
-            value={todoName}
-            onChange={handleNameChange}
-          />
+      <form action="" onSubmit={handleAddButtonClick}>
+        <div className={`${styles.pgRow} row`}>
+          <div className="col-6">
+            <input
+              type="text"
+              placeholder="Enter To-do Here"
+              value={todoName}
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="col-4">
+            <input type="date" onChange={handleDateChange} value={dueDate} />
+          </div>
+          <div className="col-2">
+            <button
+              type="submit"
+              className={`${styles.pgButton} btn btn-success`}
+            >
+              <BiMessageAdd></BiMessageAdd>
+            </button>
+          </div>
         </div>
-        <div className="col-4">
-          <input type="date" onChange={handleDateChange} value={dueDate} />
-        </div>
-        <div className="col-2">
-          <button
-            type="button"
-            className={`${styles.pgButton} btn btn-success`}
-            onClick={handleAddButtonClick}
-          >
-            Add
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
   );
 }
