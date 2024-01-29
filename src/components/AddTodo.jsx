@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./AddTodo.module.css";
 import { BiMessageAdd } from "react-icons/bi";
 
 function AddTodo({ onNewItem }) {
   const [todoName, setTodoName] = useState("");
   const [dueDate, setDueDate] = useState("");
+  // const todoNameElement = useRef();
+  // const dueDateElement = useRef(0);
 
   const handleNameChange = (event) => {
     setTodoName(event.target.value);
+    noOfUpdates.current += 1;
   };
 
   const handleDateChange = (event) => {
     setDueDate(event.target.value);
+    console.log(`noOfUpdates are :${noOfUpdates.current}`);
   };
 
   const handleAddButtonClick = (event) => {
-    // console.log(event);
     event.preventDefault();
     onNewItem(todoName, dueDate);
     setTodoName("");
