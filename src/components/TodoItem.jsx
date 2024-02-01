@@ -1,9 +1,14 @@
 import styles from "./TodoItem.module.css";
 import { MdDelete } from "react-icons/md";
+import { useContext } from "react";
+import TodoItemsContext from "../store/todo-items-store";
 
-function TodoItem({ todoName, todoDate, onDeleteClick }) {
+function TodoItem({ todoName, todoDate }) {
   // let todoName = "Buy Milk";
   // let todoDate = "04/10/2023";
+
+  const { deleteItem } = useContext(TodoItemsContext);
+
   return (
     <div className="container">
       <div className={`${styles.pgRow} row`}>
@@ -14,7 +19,7 @@ function TodoItem({ todoName, todoDate, onDeleteClick }) {
             type="button"
             className={`${styles.pgButton} btn btn-danger`}
             onClick={() => {
-              onDeleteClick(todoName);
+              deleteItem(todoName);
             }}
           >
             <MdDelete></MdDelete>
